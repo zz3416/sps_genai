@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel, Field
 
 from app.bigram_model import BigramModel
+from app.embedding_model import calculate_embedding
 
 app = FastAPI(title="Simple Bigram Text Generator")
 
@@ -23,6 +24,9 @@ class TextGenerationRequest(BaseModel):
     start_word: str = Field(min_length=1, examples=["the"])
     length: int = Field(default=20, ge=1, le=200)
 
+class EmbeddingRequest(BaseModel):
+    word: str = Field(min_length=1, examples=["apple"])
+
 
 @app.get("/")
 def read_root():
@@ -33,3 +37,11 @@ def read_root():
 def generate_text(request: TextGenerationRequest):
     generated_text = bigram_model.generate_text(request.start_word, request.length)
     return {"generated_text": generated_text}
+
+@app.post("/embedding")
+def get_embedding(request: EmbeddingRequest):
+    embedding = calculate_embedding(request.word)
+    return {
+        "word": request.word,
+        "embedding": embedding
+    }
