@@ -1,1 +1,1 @@
-"""FastAPI application package for the text generator."""
+"""FastAPI application package for the course assignments."""

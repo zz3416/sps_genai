@@ -11,3 +11,14 @@ wheels/
 
 # Local environment variables and API keys
 .env
+
+# Local IDE and operating-system files
+.idea/
+.DS_Store
+
+# Downloaded datasets and training artifacts
+data/
+
+# Locally generated assignment documents
+tmp/
+output/
