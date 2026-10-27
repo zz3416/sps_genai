@@ -28,6 +28,7 @@ RUN uv run python -m spacy download en_core_web_lg
 
 # Copy the application code
 COPY ./app /code/app
+COPY ./helper_lib /code/helper_lib
 COPY ./models /code/models
 
 # Command to run the application
